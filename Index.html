@@ -1,9 +1,288 @@
-<html>
-<head>
-  <title>index</tittle>
-</head>
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <title>Colgate</title>
+    </head>
+    <body bgcolor="black">
 
-<body>
-  <h1>hola</h1>
-</body>
+    	<h1> <center><image src="sources\Colgate.png" width="800" height="125"></image></center> </h1>
+
+        <style>
+            .hide {
+                display: none;
+            }
+
+            .initial {
+                display: block;
+            }
+
+            .videos {
+                position: relative;
+                max-width: 700px;
+                height: 400px;
+                margin: 0 auto;
+            }
+
+            .videos video {
+                max-width: 100%;
+                height: auto;
+            }
+
+            .play {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                width: 100%;
+                height: 98%;
+                padding: 0;
+                top: 0;
+                background-color: none;
+            }
+
+            .play:hover .fil1 {
+                fill: #fff;
+            }
+
+            .menu {
+                height: 100%;
+                background-color: none;
+            }
+
+            .menu, .menu-wrapper {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -51%);
+                width: 100%;
+                padding: 0;
+                text-align: center;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .menu, .menu a {
+                color: #fff;
+            }
+
+            .menu a:hover {
+                cursor: pointer;
+            }
+
+            .menu ul li {
+                list-style-type: none;
+            }
+
+            @media only screen and (min-width: 768px) {
+                .menu ul li {
+                    display: inline-block;
+                    margin-right: 30px;
+                }
+            }
+
+            @media only screen and (max-width: 450px) {
+                .show-below-450 {
+                    display: block !important;
+                    color: red;
+                    padding-left: 0;
+                    padding-right: 0;
+                }
+            }
+        </style>
+
+        <div class="videos">
+            <div class="active initial closing">
+                <video  muted><source src="sources/videos editados final/Video 1.mp4" type="video/mp4"><</video>
+            </div>
+            <div class="vid_2 hide">
+                <video>
+                    <source src="sources/videos editados final/Video 2.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="vid_2 hide">
+                <video>
+                    <source src="sources/videos editados final/Video 2.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="vid_1 hide">
+                <video>
+                    <source src="sources/videos editados final/Video 4.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="dos hide">
+                <video>
+                    <source src="sources/videos editados final/Video 11.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="dos hide">
+                <video>
+                    <source src="sources/videos editados final/Video 11.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="uno hide">
+                <video>
+                    <source src="sources/videos editados final/Video 9.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="uno hide">
+                <video>
+                    <source src="sources/videos editados final/Video 9.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="vid_1 hide">
+                <video>
+                    <source src="sources/videos editados final/Video 4.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="play">
+                <image src="sources\play.png" width="100" height="100">
+            </div>
+            <div class="menu hide">
+                <div class="menu-wrapper">
+                    <div class="initial hide">
+                        <h3>En este momento</h1>
+                        <h4>Se muestra la segunda eleccion</h2>
+                    </div>
+                    <div class="closing hide">
+                        <h3>En este momento</h3>
+                        <h4>Se muestra la primera eleccion</h4>
+                    </div>
+                    <div class="options hide">
+                        <ul>
+                            
+                        </ul>
+                        <ul>
+                            <li><a id="seleccion_uno"><image src="sources\Botones\1.1_2.1.png" width="100" height="50"></a></li>
+                            <li><a id="seleccion_dos"><image src="sources\Botones\1.2_2.2.png" width="100" height="50"></image></a></li>
+                        </ul>
+                    </div>
+                    <div class="eleccion hide">
+                        <ul>
+                            
+                        </ul>
+                        <ul>
+                            <li><a id="elecion_uno"><image src="sources\Botones\1.1_2.1.png" width="100" height="50"></image></a></li>
+                            <li><a id="elecion_dos"><image src="sources\Botones\1.2_2.2.png" width="100" height="50"></image></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hide show-below-450 mb15">
+            <p>Please, change your phone to landscape view!</p>
+        </div>
+
+
+
+        <script>
+        window.onload = function() {
+            var videosContainer = document.getElementsByClassName("videos")[0];
+            var menu = document.getElementsByClassName("menu")[0];
+            var menuOptions = menu.getElementsByClassName("options")[0];
+            var escoger = menu.getElementsByClassName("eleccion")[0];
+
+            var playButton = document.getElementsByClassName("play")[0];
+            playButton.onclick = function() {
+                playButton.style.display = "none";
+                playInitialMenu();
+            }
+
+            var catPersonLink = document.getElementById("elecion_dos");
+            catPersonLink.onclick = function() {
+                showVideos(0, videosContainer.getElementsByClassName("vid_2"));
+            }
+
+            var catPersonLink = document.getElementById("seleccion_uno");
+            catPersonLink.onclick = function() {
+                showVideos(0, videosContainer.getElementsByClassName("vid_1"));
+            }
+
+            var dogPersonLink = document.getElementById("seleccion_dos");
+            dogPersonLink.onclick = function() {
+                showVideos(0, videosContainer.getElementsByClassName("dog"));
+            }
+
+            var dogPersonLink = document.getElementById("elecion_uno");
+            dogPersonLink.onclick = function() {
+                showVideos(0, videosContainer.getElementsByClassName("uno"));
+            }
+
+            function playInitialMenu() {
+                playVideo(videosContainer.getElementsByClassName("initial")[0]);
+
+                setTimeout (function () {
+                    menu.style.display = "block";
+                    menu.getElementsByClassName("initial")[0].style.display = "block";
+                    escoger.style.display = "block";
+                }, 1000);
+            };
+
+            function playClosingMenu() {
+                playVideo(videosContainer.getElementsByClassName("closing")[0]);
+
+                menu.getElementsByClassName("initial")[0].style.display = "none";
+
+                setTimeout (function () {
+                    menu.style.display = "block";
+                    menu.getElementsByClassName("closing")[0].style.display = "block";
+                    menuOptions.style.display = "block";
+                }, 1000);
+            };
+
+            function playVideo(videoContainer, loop=false) {
+                var lastVideoContainer = videosContainer.getElementsByClassName("active")[0];
+                lastVideoContainer.classList.remove("active");
+                lastVideoContainer.style.display = "none";
+
+                videoContainer.style.display = "block";
+                videoContainer.classList.add("active");
+
+                var video = videoContainer.getElementsByTagName("video")[0];
+                video.preload = "auto";
+                video.load();
+                video.play();
+
+                return video;
+            }
+
+            function showVideos(index, videos) {
+                if (index < (videos.length - 1)) {
+                    hasNextVideo = true;
+                } else {
+                    hasNextVideo = false;
+                }
+
+                menu.style.display = "none";
+
+                var video = playVideo(videos[index]);
+
+                video.addEventListener("timeupdate", function() {
+                    var currentTime = (this.currentTime / this.duration) * 100;
+
+                    if (hasNextVideo && currentTime > 70) {
+                        nextVideo = videos[index + 1];
+                        nextVideoTag = nextVideo.getElementsByTagName("video")[0];
+                        nextVideoTag.preload = "auto";
+                    }
+                })
+
+                video.onended = function() {
+                    if (hasNextVideo) {
+                        showVideos(index+1, videos);
+                    } else {
+                        playClosingMenu();
+                    }
+                }
+            }
+        }
+        </script>
+
+        <h1> <center><image src="sources\UAO.png" width="200" height="200"></image></center> </h1>
+
+
+        
+
+    </body>
 </html>
